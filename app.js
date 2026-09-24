@@ -4,6 +4,8 @@ for (let i = 0; i < 4; i++) {
     hemmeligKode += Math.floor(Math.random() * 10);
 }
 
+console.log(hemmeligKode);
+
 let knap = document.getElementById("knap");
 let resultat = document.getElementById("resultat");
 
@@ -18,13 +20,23 @@ knap.addEventListener("click", function() {
     let rigtigPlads = 0;
     let forkertPlads = 0;
 
+    let brugtKode = [false, false, false, false];
+    let brugtGaet = [false, false, false, false];
+
     for (let i = 0; i < 4; i++) {
         if (gaet[i] === hemmeligKode[i]) {
             rigtigPlads++;
-        } else {
+            brugtKode[i] = true;
+            brugtGaet[i] = true;
+        }
+    }
+
+    for (let i = 0; i < 4; i++) {
+        if (brugtGaet[i] === false) {
             for (let j = 0; j < 4; j++) {
-                if (gaet[i] === hemmeligKode[j]) {
+                if (brugtKode[j] === false && gaet[i] === hemmeligKode[j]) {
                     forkertPlads++;
+                    brugtKode[j] = true;
                     break;
                 }
             }
